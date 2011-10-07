@@ -1,0 +1,67 @@
+/* ================================================================================================================== */
+/*                                              DATASTORE                                                             */
+/* ================================================================================================================== */
+
+var store = new Ext.data.Store({
+    url: 'employees/all_employees',
+    reader: new Ext.data.JsonReader({
+        root:'all_employees',
+        idProperty:'id'
+    },
+            [
+                {name: 'id', mapping: 'employee.id'},
+                {name: 'name', mapping: 'employee.name'},
+                {name: 'address', mapping: 'employee.address'},
+                {name: 'phone', mapping: 'employee.phone'}
+            ]
+
+            ),
+    autoLoad: true
+});
+
+/* ================================================================================================================== */
+/*                                         GRID PANEL #1                                                              */
+/* ================================================================================================================== */
+
+
+var grid = new Ext.grid.GridPanel({
+    renderTo: Ext.getBody(),
+    frame: true,
+    title: 'Névjegy',
+    autoWidth: true,
+    autoHeight: true,
+    store: store,
+
+    colModel: new Ext.grid.ColumnModel({
+        defaultSortable: true,
+
+        columns: [
+            {header: "ID", dataIndex: 'id'},
+            {header: "Név", dataIndex: 'name', sortable: true, locked: true },
+            {header: "Cím", dataIndex: 'address'},
+            {header: "Telefonszám", dataIndex: 'phone'}
+        ]
+
+    }),
+
+    selModel: new Ext.grid.RowSelectionModel({
+        singleSelect: true,
+        listeners: {
+            rowselect: function(sm, index, record) {
+                Ext.Msg.alert('You Selected', record.get('title'));
+            }
+        }
+    }),
+
+    viewConfig: {
+      autoFill: true
+    },
+
+    b_bar: new Ext.PagingToolbar({
+        pageSize: 3,
+        store: store
+    })
+
+});
+
+Ext.onReady(grid);

@@ -1,0 +1,76 @@
+var employee_add_form = new Ext.FormPanel({
+    url: 'employees/create',
+    renderTo: Ext.getBody(),
+    frame: true,
+    autoWidth: true,
+    items:[
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Név',
+            width: '98%',
+            name: 'employee[name]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Cím',
+            width: '98%',
+            name: 'employee[address]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Telefonszám',
+            width: '98%',
+            name: 'employee[phone]'
+        },
+        {
+            xtype: 'textarea',
+            fieldLabel: 'Megjegyzés' ,
+            height: 100,
+            anchor: '100%',
+            name: 'description'
+        }
+    ],
+
+    buttons:[
+        {
+            text: 'Mentés',
+            handler: function() {
+                employee_add_form.getForm().submit({
+                    success: function(form, action) {
+                        Ext.Msg.alert('Sikeres felvitel!', 'Sikeresen rögzítetted az új dolgozót!');
+                        add_employee_window.close();
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Warning', 'Error');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Mezők törlése',
+            handler: function() {
+                employee_add_form.getForm().reset();
+            }
+        }
+    ]
+
+});
+
+var add_employee_window = new Ext.Window({
+    title: 'Új dolgozó hozzáadása',
+    width: 500,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: true,
+    layout: 'form',
+    /*padding: 10,*/
+    items:[
+      employee_add_form
+    ]
+
+});
+/* add_employee_form.show();*/
+add_employee_window.show();
+
