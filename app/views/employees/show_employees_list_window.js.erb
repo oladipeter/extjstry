@@ -27,19 +27,20 @@ var store = new Ext.data.Store({
 var grid = new Ext.grid.GridPanel({
     renderTo: Ext.getBody(),
     frame: true,
-    title: 'Névjegy',
+    title: 'Globomax dolgozók listája',
     autoWidth: true,
-    autoHeight: true,
+    height: 200,
+    scrollable: true,
     store: store,
 
     colModel: new Ext.grid.ColumnModel({
         defaultSortable: true,
 
         columns: [
-            {header: "ID", dataIndex: 'id'},
-            {header: "Név", dataIndex: 'name', sortable: true, locked: true },
-            {header: "Cím", dataIndex: 'address'},
-            {header: "Telefonszám", dataIndex: 'phone'}
+            {header: "ID", dataIndex: 'id', width: 40},
+            {header: "Név", dataIndex: 'name', sortable: true, locked: true, width: 260 },
+            {header: "Cím", dataIndex: 'address', width: 300},
+            {header: "Telefonszám", dataIndex: 'phone', width: 150}
         ]
 
     }),
@@ -48,20 +49,100 @@ var grid = new Ext.grid.GridPanel({
         singleSelect: true,
         listeners: {
             rowselect: function(sm, index, record) {
-                Ext.Msg.alert('You Selected', record.get('title'));
             }
         }
     }),
 
-    viewConfig: {
+    /*viewConfig: {
       autoFill: true
-    },
+    },*/
 
-    b_bar: new Ext.PagingToolbar({
+    /*b_bar: new Ext.PagingToolbar({
         pageSize: 3,
         store: store
-    })
+    })*/
 
 });
 
-Ext.onReady(grid);
+var list_employee_window = new Ext.Window({
+    title: "Lista",
+    width: 800,
+    scrollable: true,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: false,
+    layout: 'form',
+    /*padding: 10,*/
+    items:[
+      grid
+    ],
+
+    tbar: [
+        {
+            text: 'Új',
+            icon: '../images/exticons/user_add.png',
+            handler: function() {
+                Ext.Ajax.request({
+                    url: 'employees/show_employees_add_window',
+                    params: {
+                        action : "form_drawing"
+                    },
+                    success: function(response) {
+                        var response_text = response.responseText;
+                        eval(response_text);
+                    },
+                    failure: function(resp) {
+                        Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Módosítás'
+        },
+        {
+            text: 'Eltávolítás',
+            handler: function() {
+                var sm = grid.getSelectionModel(),
+                        sel = sm.getSelected();
+                if (sm.hasSelection()) {
+                    Ext.Msg.show({
+                        title: 'Dolgozó eltávolítása',
+                        buttons: Ext.MessageBox.YESNOCANCEL,
+                        msg: 'Biztosan eltávolítod a következőt dolgozót : ' + sel.data.name + '?',
+                        fn: function(btn) {
+                            if (btn == 'yes') {
+
+                             Ext.Ajax.request({
+                                    url: 'employees/destroy',
+                                    params: {
+                                        id: sel.data.id
+                                    },
+                                    success: function(resp, opt) {
+                                        grid.getStore().remove(sel);
+                                    },
+                                    failure: function(resp, opt) {
+                                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+                }
+                else {
+                   Ext.Msg.alert('Figyelmeztetés!', 'Nincs sor kiválasztva!');
+                }
+
+            }
+
+
+        }
+    ]
+
+    });
+/* add_employee_form.show();*/
+list_employee_window.show();
+/*Ext.onReady(grid);*/

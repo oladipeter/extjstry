@@ -18,54 +18,25 @@
                   xtype: 'button',
                   icon: '../images/exticons/user.png',
                   text: 'Globomax dolgozók',
-                  menu: [
-                      {
-                          text: 'Lista',
-                          icon: '../images/exticons/user_list.png',
-                          handler: function(){
-                              Ext.Ajax.request({
-                                  url: 'employees/show_employees_list_window',
-                                  params: {
-                                      action : "no_more_window"
-                                  },
-                                  success: function(response) {
-                                      var response_text = response.responseText;
-                                      eval(response_text);
-                                  },
-                                  failure: function(resp) {
-                                      Ext.Msg.alert('Error', 'Unable!');
-                                  }
-                              });
+                  handler: function() {
+                      Ext.Ajax.request({
+                          url: 'employees/show_employees_list_window',
+                          success: function(response){
+                             var response_text = response.responseText;
+                              eval(response_text);
+                          },
+                          failure: function(resp) {
+                              Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor!!');
                           }
-                      },
-                      {
-                          text: 'Hozzáadás',
-                          icon: '../images/exticons/user_add.png',
-                          handler: function(){
-                              Ext.Ajax.request({
-                                  url: 'employees/show_employees_add_window',
-                                  params: {
-                                      action : "form_drawing"
-                                  },
-                                  success: function(response) {
-                                      var response_text = response.responseText;
-                                      eval(response_text);
-                                  },
-                                  failure: function(resp) {
-                                      Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
-                                  }
-                              });
-                          }
-                      }
-
-                  ]
+                      });
+                  }
               },
               {
                   xtype: 'tbseparator'
               },
               {
                   xtype: 'button',
-                  icon: '../images/exticons/user.png',
+                  icon: '../images/exticons/systems.png',
                   text: 'Rendszerek',
                   handler: function() {
                       Ext.Ajax.request({

@@ -68,11 +68,10 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1.xml
   def destroy
     @employee = Employee.find(params[:id])
-    @employee.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(employees_url) }
-      format.xml  { head :ok }
+    if @employee.destroy
+      render :json => {:success => true }
+    else
+      render :json => {:failure => true }
     end
   end
 

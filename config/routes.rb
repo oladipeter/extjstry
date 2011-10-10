@@ -13,6 +13,9 @@ GlobomaxEmployee::Application.routes.draw do
   # Employees create with extjs form
   match 'employees/create' => 'employees#create', :as => :employees_create
 
+  # Employees destroy on server side
+  match 'employees/destroy' => 'employees#destroy', :as => :employees_destroy
+
   resources :abouts
 
   match 'start/index' => 'start#index'
