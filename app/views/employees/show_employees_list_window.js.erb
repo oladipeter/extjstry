@@ -29,7 +29,7 @@ var grid = new Ext.grid.GridPanel({
     frame: true,
     title: 'Globomax dolgozók listája',
     autoWidth: true,
-    height: 200,
+    height: 300,
     scrollable: true,
     store: store,
 
@@ -100,7 +100,40 @@ var list_employee_window = new Ext.Window({
             }
         },
         {
-            text: 'Módosítás'
+            text: 'Módosítás',
+            handler: function() {
+                var sm = grid.getSelectionModel(),
+                        sel = sm.getSelected();
+                if (sm.hasSelection()) {
+                    Ext.Msg.show({
+                        title: 'Dolgozó módosítása',
+                        buttons: Ext.MessageBox.YESNOCANCEL,
+                        fn: function(btn) {
+                            if (btn == 'yes') {
+
+                             Ext.Ajax.request({
+                                    url: 'employees/show_employees_modify_window',
+                                    params: {
+                                        id: sel.data.id
+                                    },
+                                    success: function(resp, opt) {
+                                        var response_text = response.responseText;
+                                        eval(response_text);
+                                    },
+                                    failure: function(resp, opt) {
+                                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
+                                    }
+                             });
+
+                            }
+                        }
+                    });
+                }
+                else {
+                   Ext.Msg.alert('Figyelmeztetés!', 'Nincs sor kiválasztva!');
+                }
+
+            }
         },
         {
             text: 'Eltávolítás',

@@ -1,8 +1,7 @@
 GlobomaxEmployee::Application.routes.draw do
 
 
-  # Employees load data
-  match 'employees/all_employees' => 'employees#all_employees', :as => :all_employees
+
 
   # Employees show grid
   match 'employees/show_employees_list_window' => 'employees#show_employees_list_window', :as => :show_employees_list_window
@@ -15,6 +14,15 @@ GlobomaxEmployee::Application.routes.draw do
 
   # Employees destroy on server side
   match 'employees/destroy' => 'employees#destroy', :as => :employees_destroy
+
+  # Employee modify on server side
+  match 'employees/modify' => 'employees#modify', :as => :employees_modify
+
+  # Employee modify on server side
+  match 'employees/show_employees_modify_window' => 'employees#show_employees_modify_window', :as => :show_employees_modify_window
+
+  # Employees load data
+  match 'employees/all_employees' => 'employees#all_employees', :as => :all_employees
 
   resources :abouts
 

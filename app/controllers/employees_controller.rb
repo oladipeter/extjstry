@@ -83,6 +83,12 @@ class EmployeesController < ApplicationController
   def show_employees_add_window
   end
 
+  def show_employees_modify_window
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def all_employees
     @all_employees = Employee.find(:all)
     render :json => { :all_employees => @all_employees }
