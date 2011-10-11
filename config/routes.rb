@@ -1,9 +1,22 @@
 GlobomaxEmployee::Application.routes.draw do
 
+  #----------------------------------------------- ABOUT US -----------------------------------------------------------
+
+  # SHOW ABOUT WINDOW
+  match 'abouts/show_about_window' => 'abouts#show_about_window'
+
+  #----------------------------------------------- ABOUT US -----------------------------------------------------------
+
+  #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
+
+  # SHOW ALL - INDEX
+  match 'globomaxsystems/index' => 'globomaxsystems#index'
+  match 'globomaxsystems/show_index_window' => 'globomaxsystems#show_index_window'
+
+  #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
 
 
-
-  # Employees show grid
+    # Employees show grid
   match 'employees/show_employees_list_window' => 'employees#show_employees_list_window', :as => :show_employees_list_window
 
   # Employees show form to edit
@@ -24,14 +37,14 @@ GlobomaxEmployee::Application.routes.draw do
   # Employees load data
   match 'employees/all_employees' => 'employees#all_employees', :as => :all_employees
 
-  resources :abouts
-
   match 'start/index' => 'start#index'
+
+  resources :abouts
 
   # map.connect "/start.js", :controller => "index", :action => "start", :format => "js"
   # map.connect "/js/:action.js", :controller => "js", :format => "js"
 
-  resources :employees
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

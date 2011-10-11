@@ -37,10 +37,10 @@
               {
                   xtype: 'button',
                   icon: '../images/exticons/systems.png',
-                  text: 'Rendszerek',
+                  text: 'Globomax rendszerek',
                   handler: function() {
                       Ext.Ajax.request({
-                          url: 'employees/show_employees_list_window',
+                          url: 'globomaxsystems/show_index_window',
                           params: {
                               action : "no_more_window"
                           },
@@ -62,7 +62,7 @@
                   text: 'Névjegy',
                   handler: function() {
                       Ext.Ajax.request({
-                          url: 'abouts/show',
+                          url: 'abouts/show_about_window',
                           success: function(response){
                              var response_text = response.responseText;
                               eval(response_text);
@@ -77,6 +77,5 @@
           ]
       });
   });
-
 
 </script>
