@@ -1,0 +1,57 @@
+var add_new_globomax_system_form = new Ext.FormPanel({
+    url: 'globomaxsystems/create_system',
+    renderTo: Ext.getBody(),
+    frame: true,
+    autoWidth: true,
+    items:[
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Név',
+            width: '98%',
+            name: 'globomaxsystem[name]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Fejlesztő',
+            width: '98%',
+            name: 'globomaxsystem[developer]'
+        }
+
+    ],
+
+    buttons:[
+        {
+            text: 'Mentés',
+            handler: function() {
+                add_new_globomax_system_form.getForm().submit({
+                    success: function(form, action) {
+                        Ext.Msg.alert('Sikeres felvitel!', 'Sikeresen rögzítetted az új rendszert!');
+                        add_new_globomax_system_window.close();
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Warning', 'Error');
+                    }
+                });
+            }
+        }
+    ]
+
+});
+
+var add_new_globomax_system_window = new Ext.Window({
+    title: 'Új rendszer hozzáadása',
+    width: 500,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: true,
+    layout: 'form',
+    /*padding: 10,*/
+    items:[
+      add_new_globomax_system_form
+    ]
+
+});
+/* add_employee_form.show();*/
+add_new_globomax_system_window.show();

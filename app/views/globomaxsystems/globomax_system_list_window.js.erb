@@ -1,0 +1,196 @@
+/* ================================================================================================================== */
+/*                                              DATASTORE                                                             */
+/* ================================================================================================================== */
+
+var store = new Ext.data.Store({
+    url: 'globomaxsystems/globomax_system_list_window_data',
+    reader: new Ext.data.JsonReader({
+        root:'globomax_systems',
+        idProperty:'id'
+    },
+            [
+                {name: 'id', mapping: 'globomaxsystem.id'},
+                {name: 'name', mapping: 'globomaxsystem.name'},
+                {name: 'developer', mapping: 'globomaxsystem.developer'}
+            ]
+
+            ),
+    autoLoad: true
+});
+
+/* ================================================================================================================== */
+/*                                         GRID PANEL                                                                 */
+/* ================================================================================================================== */
+
+
+var globomax_systems_grid = new Ext.grid.GridPanel({
+    renderTo: Ext.getBody(),
+    title: 'Globomax rendszerek listája',
+    autoWidth: true,
+    height: 300,
+    scrollable: true,
+    store: store,
+
+    colModel: new Ext.grid.ColumnModel({
+        defaultSortable: true,
+
+        columns: [
+            {header: "ID", dataIndex: 'id', width: 40},
+            {header: "Név", dataIndex: 'name', sortable: true, locked: true, width: 260 },
+            {header: "Fejlesztő", dataIndex: 'developer', width: 500}
+        ]
+
+    }),
+
+    selModel: new Ext.grid.RowSelectionModel({
+        singleSelect: true,
+        listeners: {
+            rowselect: function(sm, index, record) {
+            }
+        }
+    }),
+
+    /*viewConfig: {
+      autoFill: true
+    },*/
+
+    /*b_bar: new Ext.PagingToolbar({
+        pageSize: 3,
+        store: store
+    })*/
+
+});
+
+/* ================================================================================================================== */
+/*                                               WINDOW                                                               */
+/* ================================================================================================================== */
+
+var list_globomax_systems_window = new Ext.Window({
+    title: "Globomax Employees Application",
+    width: 800,
+    scrollable: true,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: false,
+    /*padding: 10,*/
+    items:[
+      globomax_systems_grid
+    ],
+
+    tbar: [
+        {
+            text: 'Új felvitele',
+            icon: '../images/exticons/add.png',
+            handler: function() {
+                Ext.Ajax.request({
+                    url: 'globomaxsystems/add_new_globomax_system_window',
+                    params: {
+                        action : "form_drawing"
+                    },
+                    success: function(response) {
+                        var response_text = response.responseText;
+                        eval(response_text);
+                    },
+                    failure: function(resp) {
+                        Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Módosítás',
+            icon: '../images/exticons/edit.png',
+            handler: function() {
+                var sm = grid.getSelectionModel(),
+                        sel = sm.getSelected();
+                if (sm.hasSelection()) {
+                    Ext.Msg.show({
+                        title: 'Dolgozó módosítása',
+                        buttons: Ext.MessageBox.YESNOCANCEL,
+                        fn: function(btn) {
+                            if (btn == 'yes') {
+
+                             Ext.Ajax.request({
+                                    url: 'employees/show_employees_modify_window',
+                                    params: {
+                                        id: sel.data.id
+                                    },
+                                    success: function(resp, opt) {
+                                        var response_text = response.responseText;
+                                        eval(response_text);
+                                    },
+                                    failure: function(resp, opt) {
+                                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
+                                    }
+                             });
+
+                            }
+                        }
+                    });
+                }
+                else {
+                   Ext.Msg.alert('Figyelmeztetés!', 'Nincs sor kiválasztva!');
+                }
+
+            }
+        },
+        {
+            text: 'Eltávolítás',
+            icon: '../images/exticons/delete.png',
+            handler: function() {
+                var sm = grid.getSelectionModel(),
+                        sel = sm.getSelected();
+                if (sm.hasSelection()) {
+                    Ext.Msg.show({
+                        title: 'Dolgozó eltávolítása',
+                        buttons: Ext.MessageBox.YESNOCANCEL,
+                        msg: 'Biztosan eltávolítod a következőt dolgozót : ' + sel.data.name + '?',
+                        fn: function(btn) {
+                            if (btn == 'yes') {
+
+                             Ext.Ajax.request({
+                                    url: 'employees/destroy',
+                                    params: {
+                                        id: sel.data.id
+                                    },
+                                    success: function(resp, opt) {
+                                        grid.getStore().remove(sel);
+                                    },
+                                    failure: function(resp, opt) {
+                                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
+                                    }
+                             });
+
+                            }
+                        }
+                    });
+                }
+                else {
+                   Ext.Msg.alert('Figyelmeztetés!', 'Nincs sor kiválasztva!');
+                }
+            }
+        }
+    ],
+
+    bbar: [
+        {
+            text: 'Információ',
+            icon: '../images/exticons/information.png',
+                  handler: function() {
+                      Ext.Ajax.request({
+                          url: 'abouts/show_about_window',
+                          success: function(response){
+                             var response_text = response.responseText;
+                              eval(response_text);
+                          },
+                          failure: function(resp) {
+                              Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor!!');
+                          }
+                      });
+                  }
+        }
+    ]
+});
+list_globomax_systems_window.show();

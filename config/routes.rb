@@ -2,7 +2,7 @@ GlobomaxEmployee::Application.routes.draw do
 
   #----------------------------------------------- ABOUT US -----------------------------------------------------------
 
-  # SHOW ABOUT WINDOW
+  # SHOW ABOUT WINDOW - NO LOADING DATA
   match 'abouts/show_about_window' => 'abouts#show_about_window'
 
   #----------------------------------------------- ABOUT US -----------------------------------------------------------
@@ -10,11 +10,14 @@ GlobomaxEmployee::Application.routes.draw do
   #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
 
   # SHOW ALL - INDEX
-  match 'globomaxsystems/index' => 'globomaxsystems#index'
-  match 'globomaxsystems/show_index_window' => 'globomaxsystems#show_index_window'
+  match 'globomaxsystems/globomax_system_list_window_data' => 'globomaxsystems#globomax_system_list_window_data'
+  match 'globomaxsystems/globomax_system_list_window' => 'globomaxsystems#globomax_system_list_window'
+
+  # ADD NEW SYSTEM
+  match 'globomaxsystems/add_new_globomax_system_window' => 'globomaxsystems#add_new_globomax_system_window'
+  match 'globomaxsystems/create_system' => 'globomaxsystems#create_system'
 
   #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
-
 
     # Employees show grid
   match 'employees/show_employees_list_window' => 'employees#show_employees_list_window', :as => :show_employees_list_window
