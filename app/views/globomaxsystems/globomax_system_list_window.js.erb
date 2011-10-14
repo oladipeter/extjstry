@@ -74,7 +74,7 @@ var list_globomax_systems_window = new Ext.Window({
     closable: true,
     draggable: true,
     resizable: false,
-    /*padding: 10,*/
+
     items:[
       globomax_systems_grid
     ],
@@ -85,16 +85,12 @@ var list_globomax_systems_window = new Ext.Window({
             icon: '../images/exticons/add.png',
             waitMsg: 'Parsing and validating the file..this may take few minutes..',
             handler: function() {
-                globomax_systems_grid.getStore().load();
                 Ext.Ajax.request({
                     url: 'globomaxsystems/add_new_globomax_system_window',
-                    params: {
-                        action : "form_drawing"
-                    },
                     success: function(response) {
                         var response_text = response.responseText;
                         eval(response_text);
-
+                        globomax_systems_grid.getView().refresh();
                     },
                     failure: function(resp) {
                         Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
@@ -106,23 +102,24 @@ var list_globomax_systems_window = new Ext.Window({
             text: 'Módosítás',
             icon: '../images/exticons/edit.png',
             handler: function() {
-                var sm = grid.getSelectionModel(),
+                var sm = globomax_systems_grid.getSelectionModel(),
                         sel = sm.getSelected();
                 if (sm.hasSelection()) {
                     Ext.Msg.show({
-                        title: 'Dolgozó módosítása',
+                        title: 'Rendszer módosítása',
                         buttons: Ext.MessageBox.YESNOCANCEL,
                         fn: function(btn) {
                             if (btn == 'yes') {
 
                              Ext.Ajax.request({
-                                    url: 'employees/show_employees_modify_window',
+                                    url: 'globomaxsystems/globomax_system_modify_window',
                                     params: {
                                         id: sel.data.id
                                     },
                                     success: function(resp, opt) {
                                         var response_text = response.responseText;
                                         eval(response_text);
+                                        list_globomax_systems_window.close();
                                     },
                                     failure: function(resp, opt) {
                                         Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
@@ -160,6 +157,7 @@ var list_globomax_systems_window = new Ext.Window({
                                     },
                                     success: function(resp, opt) {
                                         globomax_systems_grid.getStore().remove(sel);
+
                                     },
                                     failure: function(resp, opt) {
                                         Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
@@ -196,4 +194,5 @@ var list_globomax_systems_window = new Ext.Window({
         }
     ]
 });
+
 list_globomax_systems_window.show();

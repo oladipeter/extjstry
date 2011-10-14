@@ -24,14 +24,31 @@ class GlobomaxsystemsController < ApplicationController
     end
   end
 
+  def modify_system
+    @globomax_system = Globomaxsystem.find(params[:id])
+  end
+
   # --------------------------------------------- EXTJS WINDOWS -------------------------------------------------------
 
   def globomax_system_list_window
     # Window with 'show_index_window_data' datas
+    respond_to do |format|
+      format.js
+    end
   end
 
   def add_new_globomax_system_window
     # Create a form with basic fields
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def globomax_system_modify_window
+    @globomax_system = Globomaxsystem.find(params[:id])
+    respond_to do |format|
+      format.js
+    end
   end
 
 end

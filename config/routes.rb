@@ -9,6 +9,10 @@ GlobomaxEmployee::Application.routes.draw do
 
   #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
 
+  # MODIFY SYSTEM - With form load
+  match 'globomaxsystems/modify_system' => 'globomaxsystems#modify_system'
+  match 'globomaxsystems/globomax_system_modify_window' => 'globomaxsystems#globomax_system_modify_window'
+
   # SHOW ALL - INDEX
   match 'globomaxsystems/globomax_system_list_window_data' => 'globomaxsystems#globomax_system_list_window_data'
   match 'globomaxsystems/globomax_system_list_window' => 'globomaxsystems#globomax_system_list_window'
@@ -21,7 +25,7 @@ GlobomaxEmployee::Application.routes.draw do
   match 'globomaxsystems/delete_system' => 'globomaxsystems#delete_system'
 
 
-  #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
+  #----------------------------------------------- GLOBOMAX EMPLOYEES ---------------------------------------------------
 
     # Employees show grid
   match 'employees/show_employees_list_window' => 'employees#show_employees_list_window', :as => :show_employees_list_window
@@ -45,8 +49,6 @@ GlobomaxEmployee::Application.routes.draw do
   match 'employees/all_employees' => 'employees#all_employees', :as => :all_employees
 
   match 'start/index' => 'start#index'
-
-  resources :abouts
 
   # map.connect "/start.js", :controller => "index", :action => "start", :format => "js"
   # map.connect "/js/:action.js", :controller => "js", :format => "js"

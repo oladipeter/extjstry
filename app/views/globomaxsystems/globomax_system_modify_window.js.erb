@@ -1,0 +1,31 @@
+var w = new Ext.Window({
+    layout: form,
+    autoHeight: true,
+    width: 500,
+    padding: 20,
+    modal: true,
+    title: 'Globomax Employees névjegye',
+    html: '<h1><%= @globomax_system.id %></h1>,
+    tbar: [
+        {
+            text: "Globomax rendszerek",
+            handler: function() {
+                Ext.Ajax.request({
+                    url: 'globomaxsystems/show_index_window',
+                    params: {
+                        action : "no_more_window"
+                    },
+                    success: function(response) {
+                        var response_text = response.responseText;
+                        eval(response_text);
+                    },
+                    failure: function(resp) {
+                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor!!');
+                    }
+                });
+            }
+        }
+    ]
+
+});
+w.render();
