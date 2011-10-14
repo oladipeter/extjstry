@@ -17,6 +17,10 @@ GlobomaxEmployee::Application.routes.draw do
   match 'globomaxsystems/add_new_globomax_system_window' => 'globomaxsystems#add_new_globomax_system_window'
   match 'globomaxsystems/create_system' => 'globomaxsystems#create_system'
 
+  # DELETE SYSTEM - Without window
+  match 'globomaxsystems/delete_system' => 'globomaxsystems#delete_system'
+
+
   #----------------------------------------------- GLOBOMAX SYSTEMS ---------------------------------------------------
 
     # Employees show grid

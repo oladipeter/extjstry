@@ -83,7 +83,9 @@ var list_globomax_systems_window = new Ext.Window({
         {
             text: 'Új felvitele',
             icon: '../images/exticons/add.png',
+            waitMsg: 'Parsing and validating the file..this may take few minutes..',
             handler: function() {
+                globomax_systems_grid.getStore().load();
                 Ext.Ajax.request({
                     url: 'globomaxsystems/add_new_globomax_system_window',
                     params: {
@@ -92,6 +94,7 @@ var list_globomax_systems_window = new Ext.Window({
                     success: function(response) {
                         var response_text = response.responseText;
                         eval(response_text);
+
                     },
                     failure: function(resp) {
                         Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
@@ -140,23 +143,23 @@ var list_globomax_systems_window = new Ext.Window({
             text: 'Eltávolítás',
             icon: '../images/exticons/delete.png',
             handler: function() {
-                var sm = grid.getSelectionModel(),
+                var sm = globomax_systems_grid.getSelectionModel(),
                         sel = sm.getSelected();
                 if (sm.hasSelection()) {
                     Ext.Msg.show({
-                        title: 'Dolgozó eltávolítása',
+                        title: 'Rendszer eltávolítása',
                         buttons: Ext.MessageBox.YESNOCANCEL,
-                        msg: 'Biztosan eltávolítod a következőt dolgozót : ' + sel.data.name + '?',
+                        msg: 'Biztosan eltávolítod a következő rendszert : ' + sel.data.name + '?',
                         fn: function(btn) {
                             if (btn == 'yes') {
 
                              Ext.Ajax.request({
-                                    url: 'employees/destroy',
+                                    url: 'globomaxsystems/delete_system',
                                     params: {
                                         id: sel.data.id
                                     },
                                     success: function(resp, opt) {
-                                        grid.getStore().remove(sel);
+                                        globomax_systems_grid.getStore().remove(sel);
                                     },
                                     failure: function(resp, opt) {
                                         Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
