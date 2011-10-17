@@ -18,14 +18,19 @@ class GlobomaxsystemsController < ApplicationController
   def delete_system
     @globomax_system = Globomaxsystem.find(params[:id])
     if @globomax_system.destroy
-      render :json => {:success => true }
+      render :json => { :success => :true }
     else
       render :json => {:failure => true }
     end
   end
 
   def modify_system
-    @globomax_system = Globomaxsystem.find(params[:id])
+    @globomax_system = Globomaxsystem.find(:id)
+    if @globomax_system
+      render :json => {:success => true, :g_system => @globomax_system }
+    else
+      render :json => {:failure => true }
+    end
   end
 
   # --------------------------------------------- EXTJS WINDOWS -------------------------------------------------------

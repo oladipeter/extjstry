@@ -15,8 +15,10 @@ var store = new Ext.data.Store({
             ]
 
             ),
-    autoLoad: true
+    /*autoLoad: true*/
 });
+
+store.load();
 
 /* ================================================================================================================== */
 /*                                         GRID PANEL                                                                 */
@@ -24,6 +26,7 @@ var store = new Ext.data.Store({
 
 
 var globomax_systems_grid = new Ext.grid.GridPanel({
+    id: 'system_grid',
     renderTo: Ext.getBody(),
     title: 'Globomax rendszerek listája',
     autoWidth: true,
@@ -48,7 +51,7 @@ var globomax_systems_grid = new Ext.grid.GridPanel({
             rowselect: function(sm, index, record) {
             }
         }
-    }),
+    })
 
     /*viewConfig: {
       autoFill: true
@@ -90,7 +93,6 @@ var list_globomax_systems_window = new Ext.Window({
                     success: function(response) {
                         var response_text = response.responseText;
                         eval(response_text);
-                        globomax_systems_grid.getView().refresh();
                     },
                     failure: function(resp) {
                         Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
@@ -100,41 +102,7 @@ var list_globomax_systems_window = new Ext.Window({
         },
         {
             text: 'Módosítás',
-            icon: '../images/exticons/edit.png',
-            handler: function() {
-                var sm = globomax_systems_grid.getSelectionModel(),
-                        sel = sm.getSelected();
-                if (sm.hasSelection()) {
-                    Ext.Msg.show({
-                        title: 'Rendszer módosítása',
-                        buttons: Ext.MessageBox.YESNOCANCEL,
-                        fn: function(btn) {
-                            if (btn == 'yes') {
-
-                             Ext.Ajax.request({
-                                    url: 'globomaxsystems/globomax_system_modify_window',
-                                    params: {
-                                        id: sel.data.id
-                                    },
-                                    success: function(resp, opt) {
-                                        var response_text = response.responseText;
-                                        eval(response_text);
-                                        list_globomax_systems_window.close();
-                                    },
-                                    failure: function(resp, opt) {
-                                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
-                                    }
-                             });
-
-                            }
-                        }
-                    });
-                }
-                else {
-                   Ext.Msg.alert('Figyelmeztetés!', 'Nincs sor kiválasztva!');
-                }
-
-            }
+            icon: '../images/exticons/edit.png'
         },
         {
             text: 'Eltávolítás',

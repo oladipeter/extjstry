@@ -1,10 +1,116 @@
+var nameAndCompany = {
+    columnWidth: .5,
+    layout: 'form',
+    items: [
+        {
+            xtype: 'textfield',
+            fieldLabel: 'ID',
+            name: 'id',
+            anchor: '95%'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Rendszer',
+            name: 'name',
+            anchor: '95%'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Fejlesztő',
+            name: 'developer',
+            anchor: '95%'
+        }
+    ]
+};
+
+/* FORMPANEL */
+
+var contactForm = new Ext.FormPanel({
+    frame: true,
+    url: 'globomaxsystems/modify_system',
+    title: 'Adatok betöltése dinamikusan',
+    bodyStyle: 'padding:5px',
+    width: 650,
+
+    reader: new Ext.data.XmlReader({
+        record: 'g-system',
+        success: '@success'
+    },
+        ['id', 'name', 'developer']
+    ),
+
+    items: [
+        {
+            xtype: 'fieldset',
+            title: 'Rendszerek',
+            autoHeight: true,
+            hideBorders: true,
+            items: [
+                nameAndCompany
+            ]
+        }
+    ],
+    buttons: [
+        {
+            text: 'Save',
+            handler: function() {
+                contactForm.getForm().submit({
+                    success: function(form, action) {
+                        Ext.Msg.alert('Sikeres módosítás!', 'Sikeresen módosítottad a rendszert!');
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Warning', 'Error');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Cancel'
+        }
+    ]
+});
+
+contactForm.on({
+    actioncomplete: function(form, action) {
+        if (action.type == 'load') {
+            var contact = action.result.data;
+            Ext.getCmp(contact.name).setValue(true);
+            contactForm.setTitle(contact.name + ' ' + contact.developer);
+        }
+    }
+});
+
+var form_window = new Ext.Window({
+    title: 'Új rendszer hozzáadása',
+    autoWidth: true,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: true,
+    layout: 'form',
+    /*padding: 10,*/
+    items:[
+      contactForm
+    ]
+
+});
+/* add_employee_form.show();*/
+form_window.show();
+
+contactForm.getForm().load({ method:'get',
+params:{id:'1'},waitMsg: 'Töltöm az adatokat'});
+
+
+
+/*
 var w = new Ext.Window({
     autoHeight: true,
     width: 500,
     padding: 20,
     modal: true,
     title: 'Globomax Employees névjegye',
-    html: '<h1><%= @about.title %></h1><br/><div class="about"><p><%= @about.content %></p></div>',
+    html: '<h1><%#= @about.title %></h1><br/><div class="about"><p><%#= @about.content %></p></div>',
     tbar: [
         {
             text: "Globomax rendszerek",
@@ -27,4 +133,4 @@ var w = new Ext.Window({
     ]
 
 });
-w.show();
+w.show();*/

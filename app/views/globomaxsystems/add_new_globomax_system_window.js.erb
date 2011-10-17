@@ -1,6 +1,6 @@
 var add_new_globomax_system_form = new Ext.FormPanel({
     url: 'globomaxsystems/create_system',
-
+    id: 'add_form',
     renderTo: Ext.getBody(),
     frame: true,
     autoWidth: true,
@@ -24,10 +24,11 @@ var add_new_globomax_system_form = new Ext.FormPanel({
         {
             text: 'Mentés',
             handler: function() {
-                add_new_globomax_system_form.getForm().submit({
+                add_new_globomax_system_form.getForm('add_form').submit({
                     success: function(form, action) {
                         Ext.Msg.alert('Sikeres felvitel!', 'Sikeresen rögzítetted az új rendszert!');
                         add_new_globomax_system_window.close();
+                        Ext.getCmp( 'system_grid' ).getStore().reload();
                     },
                     failure: function(form, action) {
                         Ext.Msg.alert('Warning', 'Error');
