@@ -6,13 +6,13 @@ var car = {
             xtype: 'textfield',
             fieldLabel: 'ID',
             editable: false,
-            name: 'id',
+            name: 'car[id]',
             anchor: '95%'
         },
         {
             xtype: 'textfield',
             fieldLabel: 'Car name',
-            name: 'name',
+            name: 'car[name]',
             anchor: '95%'
         },
         {
@@ -38,7 +38,11 @@ var contactForm = new Ext.FormPanel({
         record: 'found-car',
         success: '@success'
     },
-       ['id', 'name', 'owner']
+       [
+                {name: 'car[id]', mapping: 'id'},
+                {name: 'car[name]', mapping: 'name'}
+            ]
+          //  ['id', 'name', 'owner']
     ),
 
     items: [
