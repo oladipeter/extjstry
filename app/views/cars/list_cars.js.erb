@@ -1,0 +1,142 @@
+var recordFields = [
+    {name: 'id', mapping: 'car.id'},
+    {name: 'name', mapping: 'car.name'},
+    {name: 'car_type', mapping: 'car.car_type'},
+    {name: 'owner', mapping: 'car.owner'}
+];
+
+var remoteJsonStore = new Ext.data.JsonStore({
+    fields : recordFields,
+    url : 'cars/cars_data',
+    totalProperty : 'totalCount',
+    root : 'cars',
+    id : 'ourRemoteStore',
+    autoLoad : false,
+    remoteSort : true
+});
+
+var colModel = new Ext.grid.ColumnModel([
+    {
+        header : 'DB-ID',
+        sortable : true,
+        width: '300px',
+        dataIndex : 'id'
+    },
+    {
+        header : 'Car name',
+        sortable : true,
+        dataIndex : 'name'
+    },
+    {
+        header : 'Car type',
+        dataIndex : 'car_type'
+    },
+    {
+        header : 'Owner',
+        dataIndex : 'owner'
+    }
+]);
+
+var selModel = new Ext.grid.RowSelectionModel({
+    singleSelect : true
+});
+
+var gridView = new Ext.grid.GridView();
+
+var grid = new Ext.grid.GridPanel({
+    title : 'Our first grid',
+    renderTo : Ext.getBody(),
+    autoHeight : true,
+    width : 250,
+    store : remoteJsonStore,
+    view : gridView,
+    colModel : colModel,
+    selModel : selModel,
+    listeners : {
+        rowdblclick: function(dv, record, item, index, e) {
+           var record = grid.selModel.getSelected();
+           Ext.Ajax.request({
+                    url: 'cars/show_car_window',
+                    method: 'POST',
+                    params: {
+                      id: record.data.id
+                    },
+                    success: function(response) {
+                        var response_text = response.responseText;
+                        eval(response_text);
+                    },
+                    failure: function(resp) {
+                        Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
+                    }
+                });
+        }
+    }
+});
+
+new Ext.Window({
+    height : 350,
+    width : 550,
+    border : false,
+    layout : 'fit',
+    items : grid,
+    tbar: [
+        {
+            text: 'Új felvitele',
+            icon: '../images/exticons/add.png',
+            handler: function() {
+                Ext.Ajax.request({
+                    url: 'abouts/show_about_window',
+                    success: function(response) {
+                        var response_text = response.responseText;
+                        eval(response_text);
+                    },
+                    failure: function(resp) {
+                        Ext.Msg.alert('Hiba', 'Probléma történt a válaszadáskor!');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Módosítás',
+            icon: '../images/exticons/edit.png',
+            handler: function() {
+                var sm = grid.getSelectionModel(),
+                        sel = sm.getSelected();
+                if (sm.hasSelection()) {
+                    Ext.Msg.show({
+                        title: 'Gépkocsi szerkesztése',
+                        buttons: Ext.MessageBox.YESNOCANCEL,
+                        msg: 'Biztosan módosítod a következőt gépkocsit? : ' + sel.data.name + '?',
+                        fn: function(btn) {
+                            if (btn == 'yes') {
+
+                             Ext.Ajax.request({
+                                    url: 'abouts/show_about_window', // + sel.data.id,
+                                    params: {
+                                        id: sel.data.id,
+                                        action: 'edit'
+                                    },
+                                    success: function() {
+                                        var response_text = response.responseText;
+                                        eval(response_text);
+                                    },
+                                    failure: function() {
+                                        Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
+                                    }
+                             });
+
+                            }
+                        }
+                    });
+                }
+                else {
+                   Ext.Msg.alert('Figyelmeztetés!', 'Nincs sor kiválasztva!');
+                }
+
+            }
+        }
+    ]
+}).show();
+
+Ext.StoreMgr.get('ourRemoteStore').load({
+});

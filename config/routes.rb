@@ -1,5 +1,30 @@
 GlobomaxEmployee::Application.routes.draw do
 
+  #----------------------------------------------- CARS -----------------------------------------------------------
+
+  # SHOW ABOUT WINDOW - NO LOADING DATA
+  match 'cars/new' => 'cars#new'
+  match 'cars/create' => 'cars#create'
+  match 'cars/list' => 'cars#list'
+  match 'cars/cars_data' => 'cars#cars_data'
+  match 'cars/edit/:id' => 'cars#edit'
+  match 'cars/delete' => 'cars#delete'
+  match 'cars/try' => 'cars#try'
+  match 'cars/list_cars' => 'cars#list_cars'
+  match 'cars/show_car_window' => 'cars#show_car_window'
+  match 'cars/show_car_data' => 'cars#show_car_data'
+
+
+  #----------------------------------------------- CARS -----------------------------------------------------------
+
+  get "cars/list"
+
+  get "cars/new"
+
+  get "cars/delete"
+
+  get "cars/update"
+
   #----------------------------------------------- ABOUT US -----------------------------------------------------------
 
   # SHOW ABOUT WINDOW - NO LOADING DATA

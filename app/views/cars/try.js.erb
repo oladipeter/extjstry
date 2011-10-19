@@ -1,0 +1,102 @@
+MyDesktop.ObjectiveEditGridWindow = Ext.extend(Ext.app.Module, {
+    id:'edit-objectives',
+    init : function() {
+        this.launcher = {
+            text: 'Editing Objective Details',
+            icon: '../ext/resources/icons/set1/text_linespacing.png',
+            handler : this.createWindow,
+            scope: this
+        }
+    },
+    createWindow : function() {
+        var desktop = this.app.getDesktop();
+        var win = desktop.getWindow('edit-objectives');
+        if (!win) {
+            win = desktop.createWindow({
+                id: 'edit-objectives',
+                title:'Editing Objective Details',
+                width:600,
+                height:330,
+                minimizable:false,
+                maximizable:false,
+                resizable:false,
+                iconCls: 'editobj',
+                shim:false,
+                animCollapse:false,
+                constrainHeader:true,
+                layout: 'fit',
+                buttonAlign: 'center',
+                items:
+                        [
+// a form to edit current Grant Details
+                    new Ext.grid.GridPanel({
+                        border:false,
+                        id: 'editObjectives-grid',
+                        ds: new Ext.data.Store({
+                            proxy: new Ext.data.HttpProxy({
+                                url: 'php/objectivelist.php'
+                            }),
+                            autoLoad: true,
+                            reader: new Ext.data.JsonReader({
+                                root:'rows',
+                                id: 'objectiveid'
+                            }, [
+                                'objectiveid',
+                                'objectivecode',
+                                'objectiveproposed'
+                            ])
+                        }),
+                        sm: new Ext.grid.RowSelectionModel({singleSelect:true}),
+                        cm: new Ext.grid.ColumnModel([
+                            {header: 'Objective id', dataIndex: 'objectiveid', hidden:true},
+                            {header: 'Code', width: 75, sortable: true, dataIndex: 'objectivecode'},
+                            {header: 'Objective Proposed', width: 525, sortable: true, dataIndex: 'objectiveproposed'}
+                        ]),
+                        stripeRows:true,
+                        tbar: [
+                            {
+                                text: 'Edit',
+                                icon: '../ext/resources/images/default/shared/warning.gif',
+                                handler: function() {
+
+                                    if (!myObjectiveEditWin) {
+                                        var sm = Ext.getCmp('editObjectives-grid').getSelectionModel({singleSelect:true});
+                                        var sel = sm.getSelected();
+                                        var myObjectiveEditWin = new Ext.Window({
+                                            id: 'myObjectiveEditWin',
+                                            layout:'fit',
+// anchor: '100% 100%',
+                                            height:475,
+                                            width:620,
+                                            minimizable:false,
+                                            maximizable:false,
+                                            resizable:false,
+                                            iconCls: 'editobj',
+                                            shim:false,
+                                            animCollapse:false,
+                                            constrainHeader:true,
+                                            title: 'Editing Objective Details',
+                                            closeAction: 'hide',
+                                            plain: true,
+// modal: true,
+                                            /* focus: function(){
+                                             Ext.getCmp('objectivecode').focus();
+                                             },*/
+                                            items: [editObjectiveForm]
+                                        });
+                                        Ext.getCmp('myObjectiveEditWin').on('show', function() {
+                                            Ext.getCmp('editObjectiveForm').getForm().load({url:'php/objectiveedit_fetch.php', method:'POST', params:{action:'editobjective', id:sel.data.objectiveid}});
+                                        });
+                                    }
+                                    Ext.getCmp('myObjectiveEditWin').show();
+                                }
+                            }
+                        ] // end of tbar
+                    }) // end of grid config
+                ]
+            });
+        }
+        ;
+        win.show();
+    }
+});

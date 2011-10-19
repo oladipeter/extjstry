@@ -1,0 +1,71 @@
+var edit_car_form = new Ext.FormPanel({
+    id: 'edit_car_form',
+    url: 'cars/update',
+    renderTo: Ext.getBody(),
+    frame: true,
+    autoWidth: true,
+    items:[
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Autó neve',
+            width: '98%',
+            name: 'car[name]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Típusa',
+            width: '98%',
+            name: 'car[car_type]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Tulajdonosa',
+            width: '98%',
+            name: 'car[owner]'
+        }
+
+    ],
+
+    buttons:[
+        {
+            text: 'Mentés',
+            handler: function() {
+                edit_car_form.getForm().submit({
+                    success: function(form, action) {
+                        Ext.Msg.alert('Sikeres felvitel!', 'Sikeresen rögzítetted az új autót!');
+                        Ext.getCmp( 'car_grid' ).getStore().reload();
+                        add_a_new_car_window.close();
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Hiba', 'Hiba történt válaszadáskor');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Mezők törlése',
+            handler: function() {
+                edit_car_form.getForm().reset();
+            }
+        }
+    ]
+
+});
+
+var add_a_new_car_window = new Ext.Window({
+    title: 'Autó módosítása',
+    width: 500,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: true,
+    layout: 'form',
+    /*padding: 10,*/
+    items:[
+      edit_car_form
+    ]
+
+});
+/* add_employee_form.show();*/
+add_a_new_car_window.show();

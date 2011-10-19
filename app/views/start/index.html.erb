@@ -72,6 +72,48 @@
                           }
                       });
                   }
+              },
+
+              {
+                  xtype: 'tbseparator'
+              },
+
+              {
+                  xtype: 'button',
+                  text: 'Céges gépkocsik nem megy!!!!',
+                  handler: function() {
+                      Ext.Ajax.request({
+                          url: 'cars/list',
+                          success: function(response){
+                             var response_text = response.responseText;
+                              eval(response_text);
+                          },
+                          failure: function(resp) {
+                              Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor!!');
+                          }
+                      });
+                  }
+              },
+
+              {
+                  xtype: 'tbseparator'
+              },
+
+              {
+                  xtype: 'button',
+                  text: 'Simple Grid',
+                  handler: function() {
+                      Ext.Ajax.request({
+                          url: 'cars/list_cars',
+                          success: function(response){
+                             var response_text = response.responseText;
+                              eval(response_text);
+                          },
+                          failure: function(resp) {
+                              Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor!!');
+                          }
+                      });
+                  }
               }
 
           ]

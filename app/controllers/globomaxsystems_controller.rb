@@ -25,12 +25,17 @@ class GlobomaxsystemsController < ApplicationController
   end
 
   def modify_system
-    @globomax_system = Globomaxsystem.find(:id)
+    @globomax_system = Globomaxsystem.find(31)
     if @globomax_system
-      render :json => {:success => true, :g_system => @globomax_system }
+      render :xml => {:success => true, :g_system => @globomax_system }
     else
       render :json => {:failure => true }
     end
+  end
+
+  def update_system
+    @globomax_system = Globomaxsystem.find(31)
+    @globomax_system.save
   end
 
   # --------------------------------------------- EXTJS WINDOWS -------------------------------------------------------

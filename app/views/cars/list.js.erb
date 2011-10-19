@@ -2,40 +2,119 @@
 /*                                              DATASTORE                                                             */
 /* ================================================================================================================== */
 
-var store = new Ext.data.Store({
-    id: 'employee_data_store',
-    url: 'employees/all_employees',
+var car_list_store = new Ext.data.Store({
+    id: 'cars_data_store',
+    url: 'cars/cars_data',
+    method: 'GET',
+    baseParams: {
+      limit: 3
+    },
     reader: new Ext.data.JsonReader({
-        root:'all_employees',
+        root:'cars',
         idProperty:'id'
     },
             [
-                {name: 'id', mapping: 'employee.id'},
-                {name: 'name', mapping: 'employee.name'},
-                {name: 'address', mapping: 'employee.address'},
-                {name: 'phone', mapping: 'employee.phone'}
+                {name: 'id', mapping: 'car.id'},
+                {name: 'name', mapping: 'car.name'},
+                {name: 'car_type', mapping: 'car.car_type'},
+                {name: 'owner', mapping: 'car.owner'}
             ]
 
             ),
     /*autoLoad: true*/
 });
 
-store.load();
+car_list_store.load();
+
+/* ================================================================================================================== */
+/*                                         FORM PANEL #1                                                              */
+/* ================================================================================================================== */
+
+var add_a_new_car_form = new Ext.FormPanel({
+    id: 'add_a_new_car_form',
+    url: 'cars/create',
+    frame: true,
+    autoWidth: true,
+    items:[
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Autó neve',
+            width: '98%',
+            name: 'car[name]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Típusa',
+            width: '98%',
+            name: 'car[car_type]'
+        },
+        {
+            xtype: 'textfield',
+            fieldLabel: 'Tulajdonosa',
+            width: '98%',
+            name: 'car[owner]'
+        }
+
+    ],
+
+    buttons:[
+        {
+            text: 'Mentés',
+            handler: function() {
+                add_a_new_car_form.getForm().submit({
+                    success: function(form, action) {
+                        Ext.Msg.alert('Sikeres felvitel!', 'Sikeresen rögzítetted az új autót!');
+                        Ext.getCmp( 'car_grid' ).getStore().reload();
+                        add_a_new_car_window.close();
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Hiba', 'Hiba történt válaszadáskor');
+                    }
+                });
+            }
+        },
+        {
+            text: 'Mezők törlése',
+            handler: function() {
+                add_a_new_car_form.getForm().reset();
+            }
+        }
+    ]
+
+});
+
+var add_a_new_car_window = new Ext.Window({
+    title: 'Új autó hozzáadása',
+    width: 500,
+    autoHeight: true,
+    modal: true,
+    closable: true,
+    draggable: true,
+    resizable: true,
+    layout: 'form',
+    /*padding: 10,*/
+    items:[
+      add_a_new_car_form
+    ]
+
+});
+/* add_employee_form.show();*/
+
 
 /* ================================================================================================================== */
 /*                                         GRID PANEL #1                                                              */
 /* ================================================================================================================== */
 
 
-var grid = new Ext.grid.GridPanel({
-    id: 'employee_grid',
-    renderTo: Ext.getBody(),
-    frame: true,
-    title: 'Globomax dolgozók listája',
-    autoWidth: true,
-    height: 300,
-    scrollable: true,
-    store: store,
+var car_grid = new Ext.grid.GridPanel({
+    id         : 'car_grid',
+    renderTo   : Ext.getBody(),
+    title      : 'Globomax gépkocsik',
+    autoWidth  : true,
+    height     : 300,
+    scrollable : true,
+    loadMask   : true,
+    store      : car_list_store,
 
     colModel: new Ext.grid.ColumnModel({
         defaultSortable: true,
@@ -43,19 +122,17 @@ var grid = new Ext.grid.GridPanel({
         columns: [
             {header: "ID", dataIndex: 'id', width: 40},
             {header: "Név", dataIndex: 'name', sortable: true, locked: true, width: 260 },
-            {header: "Cím", dataIndex: 'address', width: 300},
-            {header: "Telefonszám", dataIndex: 'phone', width: 150}
+            {header: "Típus", dataIndex: 'car_type', width: 150},
+            {header: "Tulajdonos", dataIndex: 'owner', width: 300}
         ]
 
     }),
 
-    selModel: new Ext.grid.RowSelectionModel({
-        singleSelect: true,
-        listeners: {
-            rowselect: function(sm, index, record) {
-            }
+    listeners : {
+        rowdblclick: function(dv, record, item, index, e) {
+           alert('jujj');
         }
-    }),
+    }
 
     /*viewConfig: {
       autoFill: true
@@ -68,19 +145,18 @@ var grid = new Ext.grid.GridPanel({
 
 });
 
-var list_employee_window = new Ext.Window({
+var car_list_window = new Ext.Window({
     title: "Lista",
     width: 800,
     scrollable: true,
     autoHeight: true,
-    modal: true,
     closable: true,
     draggable: true,
     resizable: false,
     layout: 'form',
     /*padding: 10,*/
     items:[
-      grid
+      car_grid
     ],
 
     tbar: [
@@ -89,11 +165,9 @@ var list_employee_window = new Ext.Window({
             icon: '../images/exticons/add.png',
             handler: function() {
                 Ext.Ajax.request({
-                    url: 'employees/show_employees_add_window',
-                    params: {
-                        action : "form_drawing"
-                    },
+                    url: 'cars/new',
                     success: function(response) {
+                        car_list_window.close();
                         var response_text = response.responseText;
                         eval(response_text);
                     },
@@ -107,25 +181,27 @@ var list_employee_window = new Ext.Window({
             text: 'Módosítás',
             icon: '../images/exticons/edit.png',
             handler: function() {
-                var sm = grid.getSelectionModel(),
+                var sm = car_grid.getSelectionModel(),
                         sel = sm.getSelected();
                 if (sm.hasSelection()) {
                     Ext.Msg.show({
-                        title: 'Dolgozó módosítása',
+                        title: 'Gépkocsi szerkesztése',
                         buttons: Ext.MessageBox.YESNOCANCEL,
+                        msg: 'Biztosan módosítod a következőt gépkocsit? : ' + sel.data.name + '?',
                         fn: function(btn) {
                             if (btn == 'yes') {
 
                              Ext.Ajax.request({
-                                    url: 'employees/show_employees_modify_window',
+                                    url: 'abouts/show_about_window', // + sel.data.id,
                                     params: {
-                                        id: sel.data.id
+                                        id: sel.data.id,
+                                        action: 'edit'
                                     },
-                                    success: function(resp, opt) {
+                                    success: function() {
                                         var response_text = response.responseText;
                                         eval(response_text);
                                     },
-                                    failure: function(resp, opt) {
+                                    failure: function() {
                                         Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
                                     }
                              });
@@ -144,23 +220,23 @@ var list_employee_window = new Ext.Window({
             text: 'Eltávolítás',
             icon: '../images/exticons/delete.png',
             handler: function() {
-                var sm = grid.getSelectionModel(),
+                var sm = car_grid.getSelectionModel(),
                         sel = sm.getSelected();
                 if (sm.hasSelection()) {
                     Ext.Msg.show({
-                        title: 'Dolgozó eltávolítása',
+                        title: 'Gépkocsi eltávolítása',
                         buttons: Ext.MessageBox.YESNOCANCEL,
-                        msg: 'Biztosan eltávolítod a következőt dolgozót : ' + sel.data.name + '?',
+                        msg: 'Biztosan eltávolítod a következőt gépkocsit? : ' + sel.data.name + '?',
                         fn: function(btn) {
                             if (btn == 'yes') {
 
                              Ext.Ajax.request({
-                                    url: 'employees/destroy',
+                                    url: 'cars/delete',
                                     params: {
                                         id: sel.data.id
                                     },
                                     success: function(resp, opt) {
-                                        grid.getStore().remove(sel);
+                                        car_grid.getStore().remove(sel);
                                     },
                                     failure: function(resp, opt) {
                                         Ext.Msg.alert('Hiba!', 'Probléma történt a válaszadáskor');
@@ -183,7 +259,4 @@ var list_employee_window = new Ext.Window({
 
     });
 /* add_employee_form.show();*/
-list_employee_window.show();
-
-
-/*Ext.onReady(grid);*/
+car_list_window.show();

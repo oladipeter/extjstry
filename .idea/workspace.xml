@@ -24,46 +24,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="show_about_window.js.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/abouts/show_about_window.js.erb">
+      <file leaf-file-name="list_cars.js.erb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/cars/list_cars.js.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="29" selection-start="740" selection-end="740" vertical-scroll-proportion="0.0">
+            <state line="60" column="34" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="globomax_system_list_window.js.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/globomaxsystems/globomax_system_list_window.js.erb">
+      <file leaf-file-name="cars_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/cars_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="9" selection-start="1271" selection-end="1282" vertical-scroll-proportion="0.0">
+            <state line="59" column="8" selection-start="964" selection-end="964" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="globomaxsystems_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/globomaxsystems_controller.rb">
+      <file leaf-file-name="show_car_window.js.erb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/cars/show_car_window.js.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="45" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="schema.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/schema.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="19" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_new_globomax_system_window.js.erb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/globomaxsystems/add_new_globomax_system_window.js.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="70" selection-start="967" selection-end="967" vertical-scroll-proportion="0.56666666">
+            <state line="92" column="20" selection-start="2033" selection-end="2033" vertical-scroll-proportion="0.92444444">
               <folding />
             </state>
           </provider>
@@ -79,22 +61,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/globomaxsystems/index.js.erb" />
-        <option value="$PROJECT_DIR$/app/views/windows/globomaxsystems/index.js.erb" />
-        <option value="$PROJECT_DIR$/app/views/abouts/show.js.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/employees_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/globomaxsystems/show_index_window.js.erb" />
-        <option value="$PROJECT_DIR$/app/views/start/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/globomaxsystems/modify_globomax_system_window.js.erb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/views/employees/show_employees_list_window.js.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/globomaxsystems_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/cars/new.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/cars/modify.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/cars/edit.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/cars/try.js.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/public/javascripts/application.js" />
-        <option value="$PROJECT_DIR$/app/views/globomaxsystems/globomax_system_modify_window.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/cars/list.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/start/index.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/abouts_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/abouts/show_about_window.js.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/globomaxsystems_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/globomaxsystems/globomax_system_list_window.js.erb" />
-        <option value="$PROJECT_DIR$/app/views/globomaxsystems/add_new_globomax_system_window.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/cars/show_car_data.js.erb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/cars_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/cars/list_cars.js.erb" />
+        <option value="$PROJECT_DIR$/app/views/cars/show_car_window.js.erb" />
       </list>
     </option>
   </component>
@@ -124,7 +106,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -167,6 +149,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="globomax_employee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="globomax_employee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -193,7 +189,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="globomaxsystems" />
+              <option name="myItemId" value="cars" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -232,7 +228,7 @@
         </subPane>
       </pane>
       <pane id="RailsProjectView" />
-      <pane id="Favorites" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -240,6 +236,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\rails_projects\globomax_employee\app\views\cars" />
       <recent name="C:\rails_projects\globomax_employee\app\views\globomaxsystems" />
       <recent name="C:\rails_projects\globomax_employee\app\views\employees" />
     </key>
@@ -400,6 +397,7 @@
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
+    <configuration useDefault="true">C:\Users\oladipeter\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
   </component>
   <component name="TaskManager">
@@ -465,100 +463,103 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/employees/show_employees_modify_window.js.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/globomaxsystems/globomax_system_list_window.js.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="22" selection-start="1841" selection-end="1841" vertical-scroll-proportion="0.0" />
+        <state line="121" column="29" selection-start="4253" selection-end="4917" vertical-scroll-proportion="0.62222224" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/development.log">
+    <entry file="file://$PROJECT_DIR$/app/views/cars/try.js.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7206" column="51" selection-start="336662" selection-end="336662" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/start/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="33" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0194508" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/show_employees_add_window.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="27" selection-start="0" selection-end="1842" vertical-scroll-proportion="0.92444444" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/employees_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="4" selection-start="858" selection-end="979" vertical-scroll-proportion="0.45222223" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/employees/show_employees_list_window.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="12" selection-start="4731" selection-end="6137" vertical-scroll-proportion="0.07444444" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="74" selection-start="147" selection-end="147" vertical-scroll-proportion="0.018888889" />
+        <state line="11" column="23" selection-start="395" selection-end="395" vertical-scroll-proportion="0.210823" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="39" selection-start="292" selection-end="292" vertical-scroll-proportion="0.1361556">
+        <state line="17" column="56" selection-start="663" selection-end="663" vertical-scroll-proportion="-11.115385">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/cars/new.js.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="46" selection-start="596" selection-end="596" vertical-scroll-proportion="0.018888889">
+        <state line="35" column="10" selection-start="930" selection-end="930" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/cars/edit.js.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="19" selection-start="1215" selection-end="1215" vertical-scroll-proportion="0.0">
+        <state line="34" column="58" selection-start="865" selection-end="865" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/globomaxsystems/globomax_system_modify_window.js.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/start/index.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="39" selection-start="591" selection-end="591" vertical-scroll-proportion="0.34">
+        <state line="109" column="39" selection-start="3982" selection-end="3982" vertical-scroll-proportion="0.82494277">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/abouts_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="22" selection-start="121" selection-end="121" vertical-scroll-proportion="0.075555556">
+        <state line="6" column="9" selection-start="163" selection-end="163" vertical-scroll-proportion="0.11333334">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/abouts/show_about_window.js.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="29" selection-start="740" selection-end="740" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/globomaxsystems/globomax_system_list_window.js.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="9" selection-start="1271" selection-end="1282" vertical-scroll-proportion="0.0">
+        <state line="98" column="42" selection-start="2405" selection-end="2405" vertical-scroll-proportion="0.49">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/globomaxsystems_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="45" selection-start="814" selection-end="814" vertical-scroll-proportion="0.0">
+        <state line="29" column="6" selection-start="774" selection-end="839" vertical-scroll-proportion="0.3211111">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/globomaxsystems/add_new_globomax_system_window.js.erb">
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="70" selection-start="967" selection-end="967" vertical-scroll-proportion="0.56666666">
+        <state line="17" column="50" selection-start="673" selection-end="673" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/cars/list.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="189" column="34" selection-start="5648" selection-end="5648" vertical-scroll-proportion="0.3782857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="21" selection-start="1046" selection-end="1046" vertical-scroll-proportion="0.45333335">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/cars/list_cars.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="34" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/cars_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="8" selection-start="964" selection-end="964" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/cars/show_car_window.js.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="20" selection-start="2033" selection-end="2033" vertical-scroll-proportion="0.92444444">
           <folding />
         </state>
       </provider>

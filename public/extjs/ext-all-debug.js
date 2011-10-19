@@ -62862,7 +62862,7 @@ paramOrder: 'param1|param2|param'
      * @cfg {String} waitTitle
      * The default title to show for the waiting message box (defaults to <tt>'Please Wait...'</tt>)
      */
-    waitTitle: 'Please Wait...',
+    waitTitle: 'Kérem várjon...',
 
     // private
     activeAction : null,

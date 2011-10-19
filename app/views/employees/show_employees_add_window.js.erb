@@ -38,6 +38,7 @@ var employee_add_form = new Ext.FormPanel({
                 employee_add_form.getForm().submit({
                     success: function(form, action) {
                         Ext.Msg.alert('Sikeres felvitel!', 'Sikeresen rögzítetted az új dolgozót!');
+                        Ext.getCmp('employee_grid').getStore().reload();
                         add_employee_window.close();
                     },
                     failure: function(form, action) {
