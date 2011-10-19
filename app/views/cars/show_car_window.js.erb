@@ -5,6 +5,7 @@ var car = {
         {
             xtype: 'textfield',
             fieldLabel: 'ID',
+            editable: false,
             name: 'id',
             anchor: '95%'
         },
@@ -28,7 +29,7 @@ var car = {
 var contactForm = new Ext.FormPanel({
     id: 'update_form',
     frame: true,
-    url: 'cars/show_car_data',
+    url: 'cars/update/<%= @car.id %>',
     title: 'Adatok betöltése dinamikusan',
     bodyStyle: 'padding:5px',
     width: 650,
@@ -37,7 +38,7 @@ var contactForm = new Ext.FormPanel({
         record: 'found-car',
         success: '@success'
     },
-        ['id', 'name', 'owner']
+       ['id', 'name', 'owner']
     ),
 
     items: [
@@ -57,7 +58,7 @@ var contactForm = new Ext.FormPanel({
             handler: function() {
                 contactForm.getForm().submit({
                     success: function(form, action) {
-                        Ext.Msg.alert('Sikeres módosítás!', 'Sikeresen módosítottad a rendszert!');
+                        Ext.Msg.alert('Sikeres módosítás!', 'Sikeresen módosítottad az autót!');
                     },
                     failure: function(form, action) {
                         Ext.Msg.alert('Warning', 'Error');
@@ -93,5 +94,11 @@ var form_window = new Ext.Window({
 /* add_employee_form.show();*/
 form_window.show();
 
-contactForm.getForm().load({ method:'get',
-params:{id:'<%= @car.id %>'},waitMsg: 'Töltöm az adatokat'});
+contactForm.getForm().load({
+    method:'get',
+    url: 'cars/show_car_data',
+    params:{
+        id:'<%= @car.id %>'
+    },
+    waitMsg: 'Töltöm az adatokat'
+});

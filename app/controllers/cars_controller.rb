@@ -35,6 +35,12 @@ class CarsController < ApplicationController
   end
 
   def update
+    @car = Car.find(params[:id])
+    if @car.update_attributes(params[:car])
+    render :json => { :success => true }
+    else
+      render :json => { :failure => true }
+    end
   end
 
   def create
@@ -44,9 +50,6 @@ class CarsController < ApplicationController
     else
       render :json => { :failure => true }
     end
-  end
-
-  def try
   end
 
   def list_cars

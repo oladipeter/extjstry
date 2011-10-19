@@ -13,17 +13,7 @@ GlobomaxEmployee::Application.routes.draw do
   match 'cars/list_cars' => 'cars#list_cars'
   match 'cars/show_car_window' => 'cars#show_car_window'
   match 'cars/show_car_data' => 'cars#show_car_data'
-
-
-  #----------------------------------------------- CARS -----------------------------------------------------------
-
-  get "cars/list"
-
-  get "cars/new"
-
-  get "cars/delete"
-
-  get "cars/update"
+  match 'cars/update/:id' => 'cars#update'
 
   #----------------------------------------------- ABOUT US -----------------------------------------------------------
 
